@@ -2,13 +2,12 @@
 //import 'dart:html';
 import 'dart:ui';
 
-
-
 import 'package:flutter/material.dart';
+
 void main() {
-   runApp( const MyApp()
-  );
+  runApp(const MyApp());
 }
+
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -17,18 +16,16 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool _isButtonActive=true;
-  bool  _ButtonIsPressed= false;
-  bool _TextHasChanged = false;
+  bool _ButtonIsPressed = false;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.white70,
+        backgroundColor: Colors.grey,
         body: SafeArea(
           child: Center(
             child: Container(
-              //margin: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(10.0),
               width: 300.0,
               height: 300.0,
               decoration: BoxDecoration(
@@ -40,78 +37,124 @@ class _MyAppState extends State<MyApp> {
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Column(
-
-                children: [
-                RichText(
-                textAlign: TextAlign.left,
-                text:  const TextSpan(
-                  style: TextStyle(
-                    fontSize: 14.0,
-                    color: Colors.black,
-                  ),
-                  children: <TextSpan>[
-                    TextSpan(text: 'Rs.79\n\n', style: TextStyle(
-                        fontWeight: FontWeight.bold,fontSize: 30.0),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Rs .79  ',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        fontSize: 50.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    TextSpan(text: 'Delivery: ', style: TextStyle(
-                        fontWeight: FontWeight.normal,fontSize: 20.0)),
 
-                    TextSpan(text: '2.5 Hrs\n\n ', style: TextStyle(
-                        fontWeight: FontWeight.bold,fontSize: 25.0),),
-                    TextSpan(text:'Revisions: ', style: TextStyle(fontWeight: FontWeight.normal,fontSize: 20.0)),
-                    TextSpan(text: '4\n\n', style: TextStyle(
-                        fontWeight: FontWeight.bold,fontSize: 25.0),),
-                    TextSpan(text: 'Deliverables:  \n', style: TextStyle(
-                        fontWeight: FontWeight.bold,fontSize: 17.0),),
-                    TextSpan(text: 'Poster .png, .psd, .ai files', style: TextStyle(
-                        fontWeight: FontWeight.normal,fontSize: 14.0),),
-                  ],
-                ),
-
-
-              ),
-                  Expanded(
-                    child: ButtonBar(
-                      alignment: MainAxisAlignment.center,
-                      buttonHeight: 60,
-                      buttonMinWidth: 600,
-                        children:[
-                          Padding(
-                            padding: const EdgeInsets.all(13.0),
-                            child: Expanded(
-                              flex: 1,child: RaisedButton.icon( icon: const Icon(Icons.lock, color:Colors.white,),
-                        shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(14.0),
-                              //side: const BorderSide(color: Colors.red)
+                    const SizedBox(
+                      height: 1.0,
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Row(
+                        children: const [
+                          Text(
+                            'Delivery:  ',
+                            style: TextStyle(
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.normal,
                             ),
-                        color: _ButtonIsPressed ? Colors.blue : Colors.green,
+                          ),
+                          SizedBox(width: 10.0),
+                          Text(
+                            '2.5 Hrs ',
+                            style: TextStyle(
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
 
-                        textColor: Colors.white,
-                        label: _TextHasChanged ? const Text("Place Order") : const Text("Payment Successful"),
+                    Expanded(
+                      flex: 1,
+                      child: Row(
+                        children: const [
+                          Text(
+                            'Revisions:  ',
+                            style: TextStyle(
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                          SizedBox(width: 10.0),
+                          Text(
+                            '4 ',
+                            style: TextStyle(
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // const SizedBox(
+                    //   height: 1.0,
+                    // ),
+                    const Text(
+                      'Deliverables:',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    // const SizedBox(
+                    //   height: 1.0,
+                    // ),
+                    const Text(
+                      'Poster .png, .psd, .ai files',
+                      style: TextStyle(
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 2.0,
+                    ),
+
+                    ConstrainedBox(
+                      constraints: const BoxConstraints.tightFor(
+                        height: 40.0,
+                        width: 250.0,
+                      ),
+                      child: ElevatedButton.icon(
+                        icon: Icon(
+                          _ButtonIsPressed ? null : Icons.lock,
+                          color: Colors.white,
+                        ),
+                        style: ElevatedButton.styleFrom(
+                            primary:
+                                _ButtonIsPressed ? Colors.green : Colors.blue,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.0),
+                              //side: const BorderSide(color: Colors.red)
+                            )),
+                        label: _ButtonIsPressed
+                            ? const Text("Payment Successful")
+                            : const Text("Place order"),
 
                         //    style: TextStyle(fontSize: 14)
-                        onPressed: _isButtonActive
-                            ? () {
+                        onPressed: () {
                           setState(() {
-                            _isButtonActive = false;
                             _ButtonIsPressed = !_ButtonIsPressed;
-                            _TextHasChanged = !_TextHasChanged;
                           });
-                        }:null,
-
+                        },
+                      ),
                     ),
-          ),
-                          ),
-  ],
-        ),
-      ),
-                  ],
-              ),
+                  ]),
+            ),
           ),
         ),
       ),
-    ),
     );
   }
 }
-
